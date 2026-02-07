@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EQP RENTZ — Future of Heavy Equipment</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #000000;
+      --bg-secondary: #121212;
+      --bg-tertiary: #1F1F1F;
+
+      --text-primary: #FFFFFF;
+      --text-secondary: #AFAFAF;
+      --text-tertiary: #6B6B6B;
+
+      --accent-blue: #276EF1;
+      --border-subtle: #292929;
+      --border-opaque: #333333;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(ellipse at top, #121212 0%, #000000 60%);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(0,0,0,0.8);
+      backdrop-filter: blur(8px);
+      padding: 24px 64px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .logo { font-weight: 800; letter-spacing: 1px; font-size: 20px; }
+    .logo-eqp { color: var(--text-primary); }
+    .logo-rentz { position: relative; color: var(--accent-blue); }
+    .rentz-underline {
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      height: 2px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent-blue), #6fa1ff);
+      transition: width 0.6s ease;
+    }
+    .logo-rentz.scrolled .rentz-underline { width: 100%; }
+    .reg { font-size: 10px; vertical-align: super; margin-left: 2px; color: var(--text-secondary); }
+
+    .nav a {
+      color: var(--text-secondary);
+      margin-left: 32px;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .nav a:hover { color: var(--text-primary); }
+
+    section { scroll-margin-top: 120px; }
+
+    /* HERO + DATA GRID */
+    .hero-wrap {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      transform: translateY(0px);
+      mask-image: radial-gradient(circle at 30% 30%, black 40%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-shimmer {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent 40%, rgba(39,110,241,0.15), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    .hero {
+      position: relative;
+      padding: 120px 64px 160px;
+      max-width: 1200px;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-size: 64px;
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(90deg, var(--accent-blue), #6fa1ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 18px;
+      max-width: 640px;
+      color: var(--text-secondary);
+      margin-bottom: 48px;
+    }
+
+    .cta {
+      padding: 14px 28px;
+      border-radius: 10px;
+      background: var(--accent-blue);
+      color: #fff;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 10px 40px rgba(39,110,241,0.35);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      padding: 64px;
+      max-width: 1200px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, var(--bg-tertiary), #141414);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 32px;
+    }
+
+    .icon { margin-bottom: 16px; color: var(--accent-blue); }
+    .card h3 { font-size: 20px; margin-bottom: 8px; }
+    .card p { color: var(--text-secondary); font-size: 14px; }
+
+    .future, .contact {
+      padding: 120px 64px;
+      max-width: 1000px;
+    }
+
+    .future h2, .contact h2 {
+      font-size: 42px;
+      margin-bottom: 24px;
+    }
+
+    .future ul { list-style: none; margin-top: 32px; }
+
+    .future li {
+      margin-bottom: 16px;
+      color: var(--text-secondary);
+      padding-left: 24px;
+      position: relative;
+    }
+
+    .future li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: var(--accent-blue);
+    }
+
+    footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 48px 64px;
+      display: flex;
+      justify-content: space-between;
+      color: var(--text-tertiary);
+      font-size: 14px;
+    }
+
+    footer a { color: var(--text-secondary); margin-left: 16px; text-decoration: none; }
+
+    @media (max-width: 768px) {
+      header, .hero, .grid, .future, .contact, footer { padding: 32px; }
+      .hero h1 { font-size: 44px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><span class="logo-eqp">EQP</span> <span class="logo-rentz">RENTZ<span class="reg">®</span><span class="rentz-underline"></span></span></div>
+  <nav class="nav">
+    <a href="#vision">Vision</a>
+    <a href="#technology">Technology</a>
+    <a href="#future">Future</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="hero-wrap" id="vision">
+  <div class="hero-grid"></div>
+  <div class="hero-shimmer"></div>
+  <div class="hero">
+    <h1>Engineering <span>Heavy Equipment</span><br/>for the Autonomous Economy</h1>
+    <p>
+      EQP RENTZ is redefining how heavy equipment is rented, owned and optimized — combining IoT, AI and next‑gen financial infrastructure.
+    </p>
+    <a href="#contact" class="cta">Get early access</a>
+  </div>
+</section>
+
+<section class="grid" id="technology">
+  <div class="card"><div class="icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9c0 .7.4 1.31 1.02 1.59H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div><h3>Smart Rental</h3><p>On‑demand heavy machinery rental powered by algorithmic matching for optimal availability.</p></div>
+  <div class="card"><div class="icon">🛠️</div><h3>Predictive Maintenance</h3><p>IoT sensors analyze engine health in real‑time to prevent breakdown before it happens.</p></div>
+  <div class="card"><div class="icon">📍</div><h3>Smart Tracking</h3><p>Precision GPS and geofencing ensures your assets are exactly where they need to be.</p></div>
+  <div class="card"><div class="icon">🧠</div><h3>AI Optimization</h3><p>Neural networks optimize utilization rates, reducing idle time and fuel consumption.</p></div>
+  <div class="card"><div class="icon">💎</div><h3>Fractional Ownership</h3><p>Democratizing ownership. Invest in fleets and earn returns from rental operations.</p></div>
+  <div class="card"><div class="icon">🔐</div><h3>Secure & Insured</h3><p>End‑to‑end insurance coverage and blockchain‑verified maintenance logs.</p></div>
+</section>
+
+<section class="future" id="future">
+  <h2>The Road Ahead</h2>
+  <ul>
+    <li>Integrated payments & automated settlements</li>
+    <li>Public participation in infrastructure ownership</li>
+    <li>Autonomous fleet intelligence</li>
+    <li>Global liquidity for heavy assets</li>
+  </ul>
+</section>
+
+<section class="contact" id="contact">
+  <h2>Contact Us</h2>
+  <p>Interested in partnering, investing or early access?</p>
+  <p>Email: <strong>hello@eqp.rentz</strong></p>
+</section>
+
+<footer>
+  <div>© 2026 EQP RENTZ</div>
+  <div>
+    <a href="https://twitter.com/yourhandle" target="_blank">Twitter</a>
+    <a href="https://linkedin.com/company/yourcompany" target="_blank">LinkedIn</a>
+  </div>
+</footer>
+
+<script>
+  const rentz = document.querySelector('.logo-rentz');
+  const grid = document.querySelector('.hero-grid');
+  const shimmer = document.querySelector('.hero-shimmer');
+
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (y > 40) rentz.classList.add('scrolled');
+    else rentz.classList.remove('scrolled');
+
+    grid.style.transform = `translateY(${y * 0.2}px)`;
+    shimmer.style.opacity = Math.min(y / 300, 0.6);
+  });
+</script>
+</body>
+</html>
