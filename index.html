@@ -240,7 +240,32 @@
 <section class="contact" id="contact">
   <h2>Contact Us</h2>
   <p>Interested in partnering, investing or early access?</p>
-  <p>Email: <strong>hello@eqp.rent</strong></p>
+  
+  <form action="https://formspree.io/f/mdalallv" method="POST">
+  <input type="text" name="name" placeholder="Full Name" required />
+  
+  
+  <input type="email" name="email" placeholder="Email (Optional)" />
+  
+  
+  <input type="tel" name="phone" value="+91" />
+  
+  
+  <select name="role" id="roleSelect" required>
+  <option value="" disabled selected>Select your role</option>
+  <option value="developer">Developer / Contractor</option>
+  <option value="supplier">Supplier / Aggregator</option>
+  </select>
+  
+  
+  <div class="role-helper" id="roleHelper"></div>
+  
+  
+  <textarea name="message" rows="4" placeholder="Your message"></textarea>
+  
+  
+  <button type="submit" class="cta">Submit</button>
+  </form>
 </section>
 
 <footer>
@@ -264,6 +289,19 @@
     grid.style.transform = `translateY(${y * 0.2}px)`;
     shimmer.style.opacity = Math.min(y / 300, 0.6);
   });
+    const roleSelect = document.getElementById('roleSelect');
+    const roleHelper = document.getElementById('roleHelper');
+  
+    roleSelect.addEventListener('change', function() {
+      if (this.value === 'developer') {
+        roleHelper.style.display = 'block';
+        roleHelper.textContent = 'Looking for equipment';
+      } else if (this.value === 'supplier') {
+        roleHelper.style.display = 'block';
+        roleHelper.textContent = 'I already have equipment to rent';
+      } else {
+        roleHelper.style.display = 'none';
+      }
 </script>
 </body>
 </html>
